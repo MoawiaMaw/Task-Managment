@@ -1,0 +1,56 @@
+<div class="mb-5 w-100 text-center">
+  <button mat-raised-button color="primary"  aria-label="Add Button" class="raised-button float-start" (click)="goHome()">
+    <mat-icon>arrow_back_ios</mat-icon> Go Back
+  </button>
+  <h1 class="inline">Add Task</h1>
+</div>
+
+<div class="row mt-5">
+  <div
+    class="col col-xs-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3"
+  >
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="mb-3">
+
+        <label for="firstName" class="form-label">Title:</label>
+        <br>
+        <mat-form-field class="w-100">
+          <mat-label>Enter The Title</mat-label>
+          <input matInput formControlName="title" required>
+          <mat-error *ngIf="form.controls['title'].invalid">
+            <div *ngIf="form.controls['title'].errors?.['required']">This filed is required</div>
+            <div *ngIf="form.controls['title'].errors?.['minlength']">Input should be minimum of 3 characters</div>
+            <div *ngIf="form.controls['title'].errors?.['maxlength']">Input should be maximum of 10 characters</div>
+          </mat-error>
+        </mat-form-field>
+
+      </div>
+
+      <div class="mb-3">
+
+        <label for="lastName" class="form-label">Description:</label>
+        <br>
+        <mat-form-field class="w-100">
+          <mat-label>Enter The Description</mat-label>
+          <textarea matInput formControlName="description" required></textarea>
+          <mat-error *ngIf="form.controls['description'].invalid">
+            <div *ngIf="form.controls['description'].errors?.['required']">This filed is required!!</div>
+            <div *ngIf="form.controls['description'].errors?.['minlength']">Input should be minimum of 3 characters</div>
+          </mat-error>
+        </mat-form-field>
+        
+      </div>
+      
+      <div class="text-center">
+        <button
+          mat-raised-button color="primary" class="w-100"
+          type="submit" [ngClass]="form.valid ? 'raised-button' : ''"
+          [disabled]="form.invalid"
+        >
+          Add
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
